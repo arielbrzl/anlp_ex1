@@ -199,11 +199,12 @@ def argmax(logits):
 
 if __name__ == "__main__":
     model_args, data_args, training_args, custom_args = load_arguments()
+    if not custom_args.do_train and not custom_args.do_predict:
+        sys.exit(0)
+
 
     wandb_run = init_wandb(model_args, training_args)
 
-    if not custom_args.do_train and not custom_args.do_predict:
-        sys.exit(0)
 
     model, tokenizer = load_model_and_tokenizer(model_args)
     train_dataset, val_dataset, test_dataset = get_datasets(data_args, tokenizer)
