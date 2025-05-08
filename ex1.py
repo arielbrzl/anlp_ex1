@@ -201,7 +201,8 @@ if __name__ == "__main__":
     model_args, data_args, training_args, custom_args = load_arguments()
     if not custom_args.do_train and not custom_args.do_predict:
         sys.exit(0)
-
+    if custom_args.do_train:
+        model_args.model_path = "bert-base-uncased"
 
     wandb_run = init_wandb(model_args, training_args)
 
